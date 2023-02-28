@@ -7,5 +7,5 @@ them to their final destination.
 
 Based on '🚜 The Plow' (https://github.com/lmacken/plow) it also:
 * Prioritises moving of plots to fill the disks in order of definition
-* (Optionally) removes a plot older than a given date
+* (Optionally) removes plots older than a given date
 * Collects all of the available mounted plot drives so you don't have speficfy them manually (though you can if you want to)
