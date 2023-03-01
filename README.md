@@ -99,7 +99,14 @@ WantedBy=multi-user.target
 
 #### Plotting
 Writing plot files while harvesting can have a large impact on the latency on harvester lookups (which can increase the number of stale plots being submitted to the pool).
-`ionice` (specified in the rsync *ExecStart* command above) only works if the disk scheduler in use is either CFQ (obsolete) or [BFQ](https://algo.ing.unimo.it/people/paolo/disk_sched/description.php).   Unfortunately, Debian Bullseye and Ubuntu 22.04 default to using the `mq-deadline` scheduler so ionice is ineffective.  To get ionice to work the following configuration files will need to be added/changed:
+`ionice` (specified in the rsync *ExecStart* command above) only works if the disk scheduler in use is either CFQ (obsolete) or [BFQ](https://algo.ing.unimo.it/people/paolo/disk_sched/description.php).   Unfortunately, Debian Bullseye and Ubuntu 22.04 default to using the `mq-deadline` scheduler so ionice is ineffective.  
+
+To check the current schedules in use run:
+```
+grep "" /sys/block/*/queue/scheduler
+```
+
+If BFQ is not in use for your hard disks then to get ionice to work the following configuration files will need to be added/changed:
 
 ```
 # /etc/modules-load.d/bfq.conf
