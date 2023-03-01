@@ -9,7 +9,7 @@ them to their final destination.
 
 Based on '🚜 The Plow' (https://github.com/lmacken/plow) it also:
 * Prioritises moving of plots to fill the disks in order of definition
-* (Optionally) removes a plot older than a given date
+* (Optionally) removes plots older than a given timestamp
 * Collects all of the available mounted plot drives so you don't have specify them manually (though you can if you want to)
 
 ## Usage Notes
@@ -127,6 +127,13 @@ After changing these files a reboot will be required.
 #### Normal Plotting
 
 The `mq-scheduler` has lower latency during normal operation of the harvester so after plotting is complete reverse the changes above and reboot again.
+
+### Nocache
+
+The `rsync` service also uses the [`nocache`](https://github.com/Feh/nocache) utility which ensures that rsync writes bypass the filesystem cache.  To install:
+```
+apt-get install nocache
+```
 
 ### SSH
 
