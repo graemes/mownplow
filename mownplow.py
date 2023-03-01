@@ -76,7 +76,6 @@ if IONICE:
 SSH_CMD = "ssh"
 
 REPLOT = False
-REPLOT_GLOB = "plot-k32-2023-02*.plot"
 REPLOT_BEFORE = "2023-02-26 00:00"
 
 LOCK = asyncio.Lock()  # Global ONE_AT_A_TIME lock
@@ -337,8 +336,6 @@ async def main(paths, loop):
     if not DEST_DIRS:
         create_dests = asyncio.create_task(create_dest_dirs())
         created_dests = await create_dests
-        # while not created_dests:
-        #     await asyncio.sleep(0.5)
         logging.debug(f"Destinations: {created_dests}")
 
     # Watch for new plots
