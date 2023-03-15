@@ -71,7 +71,7 @@ else:
     RSYNC_FLAGS = "--remove-source-files --preallocate --whole-file --skip-compress=plot"
 
 if IONICE:
-    RSYNC_CMD = "ionice {IONICE} rsync"
+    RSYNC_CMD = f"ionice {IONICE} {RSYNC_CMD}"
 
 SSH_CMD = "ssh"
 
