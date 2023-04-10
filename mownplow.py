@@ -141,8 +141,11 @@ async def create_dest_dirs():
         
         for dest_dir in dest_candidates:
             logging.debug(f"Evaluating {dest_dir}")
-            DEST_DIRS.append(Path(dest_dir).name)
+            DEST_DIRS.append(Path(dest_dir).name)   
 
+    if SHUFFLE:
+        random.shuffle(DEST_DIRS)
+    
     return DEST_DIRS
 
 async def plotfinder(paths, plot_queue, loop):
