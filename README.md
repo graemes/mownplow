@@ -1,18 +1,32 @@
-# 🚜 The Mow'n'Plow
+# 🚜 The Mow'n'Plow MK2
 
 ## Overview
 
-An efficient Chia Plot mower and mover.
+An efficient Chia Plot mower and mover.  It's purpose is minimise the amount of time that drives are unavailable for harvesting while replotting (or even normal plotting).
 
-Uses `inotify` to watch for new Chia plots and then fires off `rsync` to move
-them to their final destination.
+Uses `inotify` to watch for new Chia plots and then fires off `rsync` to move them to their final destination.
 
 Based on '🚜 The Plow' (https://github.com/lmacken/plow) it also:
+
+**MK1**
 * Prioritises moving of plots to fill the disks in order of definition
 * (Optionally) removes plots older than a given timestamp
 * Collects all of the available mounted plot drives so you don't have specify them manually (though you can if you want to)
 
+**MK2**
+
+This is a fairly major restructure to the codebase which adds:
+* a separate configuration file
+* the option to remove all matching plots on the destination drive at the beginning of plowing
+* the ability to remove a destination drive from harvesting until it is 'full'
+
+Rather than spilling too much ink here (who reads doco anyway?) there are comments in the `config.yaml` which should point you in the right direction.
+
+I built this tool for my own use (and the lol's :innocent:) but if you find it useful and feel the urge to buy me a drink use: xch1vlnelz9ef43z3xa4x6a3zzfm7cezwvmq332p97xlflmxxcgzdrpsqamyee
+
 ## Usage Notes
+
+This tool is an 'opinionated' method for mowing and plowing and only works with a single harvester at a time.  It has been developed and tested on Linux so YMMV might vary on Windows.
 
 ### Directory Structure
 

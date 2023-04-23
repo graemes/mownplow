@@ -1,0 +1,70 @@
+# General note: Paths SHOULD be specified absolutely. It just makes things easier :0
+
+# Sources
+Sources:
+  - /data/bladebit
+
+# Destination
+Dest:
+  Host: chia01.storage
+  Username: chia
+  Protocol: rsync
+  Port: 12000
+  # The root should match the module name defined on the rsync server
+  # and that it uniquely matches the mount path
+  Root: /plots
+  # It is assumed that there is a single layer of plot directories under the root
+  Dirs: []
+  # Dirs:
+  #   - c0b0
+  #   - c0b1
+  #   - c0b2
+  #   - c0b3
+
+# Replotting
+PlowOptions:
+  Replot: True
+  ReplotBefore: "2023-04-01 00:00"
+  # RemoveAllAtStart removes all plots which meet the ReplotBefore criteria 
+  # To remove everything set the value to the current time (for example)
+  # If Replot is False and this is True, plots are not removed.
+  RemoveAllAtStart: True
+  # If FarmDuring is set to True then the drive is NOT removed from farming.
+  # This can cause harvesting to slow down and an increase in Stales poolside.
+  FarmDuring: False
+  # Randomly reorders destination drive (specified and found). 
+  # Useful for pointing multiple plotters at a single harvester
+  Shuffle: False
+
+# Rsync
+Rsync:
+  Cmd: rsync
+  Flags: "--remove-source-files --preallocate --whole-file --skip-compress=plot"
+  # If you want to add a bwlimit for rsync use the command below and set the appropriate value
+  #Flags: "--remove-source-files --preallocate --whole-file --skip-compress=plot --bwlimit=80000" 
+
+# SSH
+SSH:
+  Port: 22
+  # Required to for carrying out harvester OS-level interrogation.
+  Private_Key_Path: "/home/chia/.ssh/id_ed25519"
+
+# Chia Harvester - Only used if PlowOptions.FarmDuring is `False`
+# It also requires the `self_hostname` configuration option to be set on the harvester 
+# to the host specified below to make the harvester api available for calling.
+#
+# It is assumed that `recursive_plot_scan: false` is set on the harvester (not tested with 'true')
+# If you can't face the pain of manually specifying all of your plot directories, run the tool with
+# `Replot: False` before starting the replot and it will add all of the directories to the config for you
+#
+Harvester:
+  # Host is normally the same as `Dest: Host` but some people like to separate their high-speed
+  # storage network from their node/farming network :innocent:
+  Host: chia01
+  Port: 8560
+  CACertPath: /chia/harvest/mainnet/config/ssl/ca/private_ca.crt
+  CertPath: /chia/harvest/mainnet/config/ssl/harvester/private_harvester.crt
+  KeyPath: /chia/harvest/mainnet/config/ssl/harvester/private_harvester.key
+
+Logging:
+  Level: INFO

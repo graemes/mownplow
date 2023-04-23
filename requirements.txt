@@ -1,2 +1,6 @@
+aiohttp
 aionotify
 asyncssh
+json
+ssl
+yaml
