@@ -8,12 +8,13 @@ Uses `inotify` to watch for new Chia plots and then fires off `rsync` to move th
 
 Based on '🚜 The Plow' (https://github.com/lmacken/plow) it also:
 
-**MK1**
+__MK1__
+
 * Prioritises moving of plots to fill the disks in order of definition
 * (Optionally) removes plots older than a given timestamp
 * Collects all of the available mounted plot drives so you don't have specify them manually (though you can if you want to)
 
-**MK2**
+__MK2__
 
 This is a fairly major restructure to the codebase which adds:
 * a separate configuration file
@@ -22,7 +23,6 @@ This is a fairly major restructure to the codebase which adds:
 
 Rather than spilling too much ink here (who reads doco anyway?) there are comments in the `config.yaml` which should point you in the right direction.
 
-I built this tool for my own use (and the lol's :innocent:) but if you find it useful and feel the urge to buy me a drink use: xch1vlnelz9ef43z3xa4x6a3zzfm7cezwvmq332p97xlflmxxcgzdrpsqamyee
 
 ## Usage Notes
 
@@ -109,6 +109,8 @@ NoNewPrivileges=on
 WantedBy=multi-user.target
 ```
 
+_Note: File permissions can be a source of frustration.  Make sure that your plot directories are owned by the user specified in the rsyncd.conf file_
+
 ### Disk Scheduler
 
 #### Plotting
@@ -152,3 +154,9 @@ apt-get install nocache
 ### SSH
 
 The script assumes that there is an entry in the `authorized_keys` file for the DEST_USER specified.  If necessary, see [Understanding SSH authorized_keys file with Examples](https://www.howtouselinux.com/post/ssh-authorized_keys-file) for instructions.
+
+### Footnote
+
+I built this tool for my own use (and the lol's :innocent:) but if you find it useful and feel the urge to buy me a drink use: 
+
+xch1vlnelz9ef43z3xa4x6a3zzfm7cezwvmq332p97xlflmxxcgzdrpsqamyee
