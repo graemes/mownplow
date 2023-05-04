@@ -105,6 +105,7 @@ async def plotwatcher(paths: list, plot_queue: queue, loop):
         if event.name.endswith(".plot"):
             plot_path = Path(event.alias) / event.name
             await plot_queue.put(plot_path)
+            await asyncio.sleep(0)
 
 
 async def plow(

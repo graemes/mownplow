@@ -1,0 +1,18 @@
+# General note: Paths SHOULD be specified absolutely. It just makes things easier :0
+
+# BladeBit binary to use
+Cmd: /home/chia/bladebit_cuda
+
+# Destination
+Dest: /data/bladebit
+
+# Plot parameters
+Plot:
+  # Required
+  FarmerKey:
+  PoolContract:
+  # Optional
+  # CompressLevel: 7
+  # NumberPlots: 0
+  # Threads: 1
+  # Device: 0
