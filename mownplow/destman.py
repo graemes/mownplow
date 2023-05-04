@@ -94,6 +94,8 @@ class DestMan:
             if not await self._remove_remote_plot(rem_file):
                 return False
             rem_file = await self._get_delete_candidate()
+            # Give other processes room to breathe
+            await asyncio.sleep(0)
         # Sync to flush all deletions
         await self.sync_dest_mount_path()
         return True

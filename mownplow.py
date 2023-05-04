@@ -141,6 +141,8 @@ async def plow(
             current_priority = dest_schedule.get_current_priority()
             logging.debug(f"Current dest priority: {current_priority}")
             if current_priority == dest_dir:
+                dest_schedule.remove_current_priority()
+
                 plot_size = plot.stat().st_size
                 plot_size_KB = int((plot_size) / (1024))
 
@@ -166,10 +168,7 @@ async def plow(
                     if not remove_success:
                         await plot_queue.put(plot)
                         break
-                
-                # Only release current priority once deletion complete
-                # Workaround for double clearance issue
-                dest_schedule.remove_current_priority()
+
                 await asyncio.sleep(0)
 
                 # Treat all destinations as remote (even if local)
@@ -177,7 +176,6 @@ async def plow(
                 if not dest_free:
                     await plot_queue.put(plot)
                     break
-                await asyncio.sleep(0)
 
                 if dest_free > plot_size_KB:
                     logging.info(
